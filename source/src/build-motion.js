@@ -79,7 +79,7 @@ var cvs=$('#canvas'),cv=$('#cv');
       T.addLabel('p2',2)
         .to('#plan2d .dims,#plan2d .lbls',{opacity:0,duration:.2},2.05)
         .to(morph,{t:1,duration:.6,ease:'power2.inOut',onUpdate:applyMorph},2.1)
-        .to(gridLines,{opacity:0,duration:.4,stagger:{each:.004,from:'edges'}},2.15)
+        .fromTo(gridLines,{opacity:1},{opacity:0,duration:.4,immediateRender:false,stagger:{each:.004,from:'edges'}},2.15)
         .to(tl3,{strokeDashoffset:0,duration:.4,stagger:{each:.004},ease:'power1.inOut'},2.45)
         .to('#plan2d',{opacity:0,duration:.3},2.6);
       C(2.05,1.02,.52,.5);
@@ -119,14 +119,14 @@ var cvs=$('#canvas'),cv=$('#cv');
          .set(rms[k-1],{opacity:0},t0+.86)
          .addLabel('r'+k,9+k);
       }
-      window.__T=T;
+      T.eventCallback('onUpdate',()=>{if(T.time()<2.15&&intro.progress()>.99)gsap.set(gridLines,{opacity:1})});window.__T=T;
       var starts=[0.05,1.05,2.05,4.05,5.05,6.05,7.05,8.05,9.05,10.05,11.05,12.05,13.05];
       ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:1,anticipatePin:1,animation:T,
         snap:{snapTo:'labels',duration:{min:.35,max:.9},delay:.12,ease:'power2.inOut',inertia:false},
         onUpdate:function(s){var t=T.duration()*s.progress,k=0;for(var i=0;i<starts.length;i++){if(t>=starts[i])k=i+1}setStage(k)}});
       listen(window,'resize',function(){fit();applyMorph()});
       const stageLabels=['p0','p1','p2','p3','p4','p5','p6','p7','r0'];
-      $$('.b-list button').forEach(button=>listen(button,'click',()=>{const st=ScrollTrigger.getById('interior-build');const time=T.labels[stageLabels[Number(button.dataset.stage)]];const target=st.start+(time/T.duration())*(st.end-st.start)+2;if(lenis)lenis.scrollTo(target,{duration:.9});else window.scrollTo({top:target,behavior:'smooth'});}));
+      listen(section,'click',event=>{const button=event.target.closest('.b-list button');if(!button)return;const st=ScrollTrigger.getById('interior-build');const time=T.labels[stageLabels[Number(button.dataset.stage)]];const target=st.start+(time/T.duration())*(st.end-st.start)+2;if(lenis)lenis.scrollTo(target,{duration:.9});else window.scrollTo({top:target,behavior:'smooth'});});
     
   },section);
   const refresh=()=>ScrollTrigger.refresh();document.fonts?.ready.then(refresh);listen(window,'load',refresh);

@@ -1,1 +1,1 @@
-import React from 'react';import {hydrateRoot} from 'react-dom/client';import {App} from './App';import './styles.css';import './redesign.css';document.documentElement.classList.add('js-enhanced');hydrateRoot(document.getElementById('root'),<App/>);
+import React from 'react';import {hydrateRoot} from 'react-dom/client';import {App} from './App';import './styles.css';import './redesign.css';import './motion.css';document.documentElement.classList.add('js-enhanced');hydrateRoot(document.getElementById('root'),<App/>);

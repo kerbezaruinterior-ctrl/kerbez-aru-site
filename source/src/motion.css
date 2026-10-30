@@ -1,0 +1,27 @@
+/* The static HTML is always readable. Motion is applied only after enhancement. */
+.reveal,.reveal.visible,.gallery-photo,.gallery-photo.photo-visible{opacity:1;transform:none;transition:none}
+.hero-image{animation:none}
+.reading-progress{position:fixed;inset:0 0 auto;height:2px;z-index:90;pointer-events:none;background:var(--gold);transform:scaleX(0);transform-origin:left center}
+.header nav a{position:relative;padding:8px 0}
+.header nav a::after{content:'';position:absolute;left:0;right:0;bottom:1px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.header nav a[data-current]::after,.header nav a:hover::after{transform:scaleX(1)}
+.mobile-nav a[data-current]{color:#986a20}
+.section-heading.motion-rule{position:relative;border-top-color:transparent}
+.motion-rule::before{content:'';position:absolute;inset:0 0 auto;height:1px;background:var(--line);transform:scaleX(var(--rule-progress,1));transform-origin:left}
+.reviews .motion-rule::before{background:#ffffff30}
+.wide-photo{overflow:clip}.wide-photo img{clip-path:inset(0 round 4px)}
+.direction-links strong,.direction-arrow{transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.direction-links a:hover strong{transform:translateX(5px)}.direction-links a:hover .direction-arrow{transform:translate(3px,-3px)}
+.package-tabs button{transition:background .3s,color .3s,border-color .3s}
+.package-panel:not([hidden])>.package-summary,.package-panel:not([hidden])>.package-details{animation:panel-arrive .55s cubic-bezier(.2,.7,.2,1) both}
+.package-panel:not([hidden])>.package-details{animation-delay:.07s}
+.student-album{transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .35s}
+@media(hover:hover) and (pointer:fine){.student-album:hover{transform:translateY(-5px)}.primary-action span,.secondary-action span,.trial-booking span{transition:transform .3s}.primary-action:hover span,.secondary-action:hover span{transform:translate(2px,-2px)}}
+.school-slide-dots span{transition:width .35s,background .35s}
+.revit-program summary>span:last-child,.our-projects-panel summary>span,.student-project-panel summary>span{transition:transform .35s}
+.our-projects-panel[open]>summary>span,.student-project-panel[open]>summary>span{transform:rotate(45deg)}
+.our-projects-content,.student-project-panel[open]>.student-albums,.revit-program details[open]>.revit-content,.online-overview>div:not([hidden]),#template-video-panel:not([hidden]){animation:panel-arrive .5s ease both}
+.contact input,.contact select,.contact textarea{transition:border-color .3s,background .3s}.contact input:focus,.contact select:focus,.contact textarea:focus{border-bottom-color:var(--gold);background:#ffffff04}
+.whatsapp-pointer a{animation:none;box-shadow:0 0 16px #bbd8a82b}
+@keyframes panel-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.reading-progress{display:none}.reveal,.gallery-photo{opacity:1;transform:none}.motion-rule::before{transform:none}*{animation:none!important;transition:none!important}}
