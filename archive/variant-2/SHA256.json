@@ -1,0 +1,21 @@
+{
+  ".gitignore": "733961d725dbb9949a0c56081b74be6b056cdca54a228e40141b6d051dd63ecb",
+  "AGENTS.md": "a3e82601f0c03f6a30e3731c43f2209d1f1c0a887b0fccab41af1be1d346b9c0",
+  "index.html": "129b894b29c10b4f068ceb93602ed95f105142b262dae11dfd1abdb51b382890",
+  "README.md": "1d0a76b415bff3c127612a1d22a97244d4d276e09fff90cbc32456574d60e1cb",
+  "img/bath.jpg": "8805964c6f7893ecb93ef177d26fb26cab393bebe9f5346f5a5de41ce8789946",
+  "img/bedroom.jpg": "23d8717ce6c0a7c89b21beade34e4d4de70505733730a74ab47e2522500dd68f",
+  "img/breakfast.jpg": "d37777dfea01ba93f45b8cbb3364bf049046b52fe7b4f2675362e9ba753838dc",
+  "img/hall.jpg": "ff46f122b612d51b38ce621d10ee791a1c54eec9764486293145154aafa96fbf",
+  "img/living.jpg": "9ccfa3e37a838a63dcef390ff363c0f582f6f6648dc05af9422ba5cd8db5ced9",
+  "img/study.jpg": "1865905f315a6621a21c5a4de883e1192fb58425dc5d0862b0c67a34c79836ea",
+  "vendor/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+  "vendor/lenis.min.js": "b2958f142f832f0d5e547cdef77e6fadfce16bea60982fc8bbf50395a2439df8",
+  "vendor/ScrollTrigger.min.js": "308219390e5e3b84cda0c481e70caa9820883ae10bda44e6e9a149a81aac4b3f",
+  "vendor/SplitText.min.js": "5e519ea2470faa15ca4d4f27e9263e5906c07c034a9b4771164dee108136563a",
+  "img/build/3-walls.jpg": "0e0baf505f2867149893baa2a9c6e9e70ceed35774c9e6818cbc6d29cd381e75",
+  "img/build/4-finish.jpg": "c7e3e00dc6a54b57904f37726f2d4fce253963863dfd8aeee071f6e359ebbb38",
+  "img/build/5-furniture.jpg": "9f141fa020cd3f2c38790d9df85ed0da92e574a071c6d5a41bf36f00c05cc2b1",
+  "img/build/6-decor.jpg": "aa17dd304e02f8f0878c4fc1f0fa2fb7cbe9e97545f02c3d2729ed6247e3443a",
+  "img/build/7-light.jpg": "f9ce38ddafb0db218a3aa81f5a5c7967c19078f78662fa15c2f2f22450676781"
+}

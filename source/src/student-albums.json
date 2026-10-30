@@ -1,0 +1,62 @@
+[
+  {
+    "id": "work-01",
+    "title": "Рабочий проект — альбом 1",
+    "pages": 29,
+    "cover": 3
+  },
+  {
+    "id": "work-02",
+    "title": "Рабочий проект — альбом 2",
+    "pages": 17,
+    "cover": 3
+  },
+  {
+    "id": "work-03",
+    "title": "Дизайн-проект — альбом 3",
+    "pages": 29,
+    "cover": 3
+  },
+  {
+    "id": "work-04",
+    "title": "Greenline",
+    "pages": 13,
+    "cover": 3
+  },
+  {
+    "id": "work-05",
+    "title": "Презентация дизайн-проекта",
+    "pages": 9,
+    "cover": 3
+  },
+  {
+    "id": "work-06",
+    "title": "Дизайн-проект — альбом 6",
+    "pages": 31,
+    "cover": 3
+  },
+  {
+    "id": "work-07",
+    "title": "Проект Revit",
+    "pages": 19,
+    "cover": 3
+  },
+  {
+    "id": "work-08",
+    "title": "Дизайн-проект — альбом 8",
+    "pages": 7,
+    "cover": 3
+  },
+  {
+    "id": "work-09",
+    "title": "Дильназ Ерембесова — дизайн-проект",
+    "pages": 9,
+    "cover": 3
+  },
+  {
+    "id": "work-10",
+    "title": "Zarina Kerbez Aru — чертежи",
+    "pages": 34,
+    "cover": 3
+  }
+]

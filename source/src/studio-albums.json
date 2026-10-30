@@ -1,0 +1,16 @@
+[
+  {
+    "id": "cupid",
+    "title": "Cupid’s apartment",
+    "pages": 19,
+    "cover": 1,
+    "base": "studio-albums"
+  },
+  {
+    "id": "almaty",
+    "title": "Алматы — дизайн-проект",
+    "pages": 35,
+    "cover": 1,
+    "base": "studio-albums"
+  }
+]
