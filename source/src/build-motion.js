@@ -1,3 +1,4 @@
+import {stageAtTime} from './build-stages.js';
 export function initBuild(){
  const section=document.getElementById('build');if(!section)return;
  const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger,SplitText=window.SplitText;
@@ -11,8 +12,11 @@ export function initBuild(){
   section.classList.add('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=false);
   let lenis=null,raf=null,navigating=false;
   if(window.Lenis){lenis=new window.Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);raf=t=>lenis.raf(t*1000);gsap.ticker.add(raf);gsap.ticker.lagSmoothing(0);window.__lenis=lenis;}
-  const anchor=e=>{const a=e.target.closest('a[href^="#"]');if(!a||!lenis)return;const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();navigating=true;lenis.scrollTo(target,{duration:1.6,offset:-72,onComplete:()=>{navigating=false}})}};
+  const anchor=e=>{const a=e.target.closest('a[href^="#"]');if(!a||!lenis)return;const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();ScrollTrigger.getById('interior-build')?.getTween(true)?.kill?.();lenis.start();navigating=true;lenis.scrollTo(target,{duration:1.6,offset:-72,onComplete:()=>{navigating=false}})}};
   listen(document,'click',anchor);
+  // Input can interrupt a Lenis anchor before onComplete fires. Never leave snap disabled.
+  const manualInput=event=>{if(event.type!=='keydown'||['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))navigating=false;};
+  listen(window,'wheel',manualInput);listen(window,'touchstart',manualInput);listen(window,'keydown',manualInput);
   const context=gsap.context(()=>{
 var cvs=$('#canvas'),cv=$('#cv');
       function fit(){var s=cvs.getBoundingClientRect().width/1344;cv.style.transform='scale('+s+')'}
@@ -39,9 +43,12 @@ var cvs=$('#canvas'),cv=$('#cv');
       gsap.set(gridLines,{opacity:0});
 
       var sts=$$('#bStage .st'),lis=$$('.b-list li'),cur=-1;
+      gsap.set(sts,{autoAlpha:0,y:0});
       function setStage(i){
         if(i===cur)return;var prev=cur;cur=i;section.dataset.stage=String(i);sts.forEach((st,j)=>st.setAttribute('aria-hidden',j===i?'false':'true'));lis.forEach(l=>l.querySelector('button')?.setAttribute('aria-current',+l.dataset.i===Math.min(i,8)?'step':'false'));
         lis.forEach(function(l){l.classList.toggle('on',+l.dataset.i===Math.min(i,8))});
+        const roomIndex=Math.max(0,i-8);const roomCount=$('[data-room-count]');if(roomCount)roomCount.textContent=(roomIndex+1)+' / 6';
+        $$('[data-room-step]').forEach(button=>button.disabled=+button.dataset.roomStep<0?i<=8:i>=13);
         if(prev>=0)gsap.to(sts[prev],{autoAlpha:0,y:-24,duration:.35,ease:'power2.in',overwrite:true});
         gsap.fromTo(sts[i],{autoAlpha:0,y:28},{autoAlpha:1,y:0,duration:.6,delay:prev>=0?.18:0,ease:'power3.out',overwrite:true});
       }
@@ -52,7 +59,7 @@ var cvs=$('#canvas'),cv=$('#cv');
       intro.from(bs?bs.words:'#buildTitle',{yPercent:110,duration:1.3,stagger:.06},.1)
         .from('.b-head .eyebrow',{opacity:0,y:14,duration:1},0)
         .to(gridLines,{opacity:1,duration:.8,stagger:{each:.012,from:'center'},ease:'power1.out'},.2)
-        .add(function(){setStage(0)},.5)
+        .add(function(){setStage(T?stageAtTime(T.time()):0)},.5)
         .from('.b-list li',{opacity:0,x:16,stagger:.05,duration:.8},.6);
 
       /* scroll timeline: 8 units, one per stage */
@@ -106,7 +113,7 @@ var cvs=$('#canvas'),cv=$('#cv');
       C(8.05,MOB?2.6:3.6,.43,.45,.9,'power2.in',true);
       T.to('#bMini',{opacity:0,duration:.3},8.1)
         .to(rms[0],{opacity:1,duration:.45,ease:'power1.inOut'},8.5)
-        .to(rimg[0],{scale:1.04,duration:.75,ease:'power2.out'},8.5)
+        .to(rimg[0],{scale:1.04,duration:.5,ease:'power2.out'},8.5)
         .to('#roomsLayer .rscrim',{opacity:1,duration:.4},8.6)
         .to('#canvas',{opacity:0,duration:.25},8.9)
        .addLabel('r0',9);
@@ -115,23 +122,21 @@ var cvs=$('#canvas'),cv=$('#cv');
         var t0=8+k+.05;
         T.to(rimg[k-1],{scale:1.16,xPercent:k%2?-4:4,duration:.85,ease:'power2.in'},t0)
          .to(rms[k],{opacity:1,duration:.55,ease:'power1.inOut'},t0+.3)
-         .fromTo(rimg[k],{scale:1.22,xPercent:k%2?5:-5},{scale:1.04,xPercent:0,duration:.75,ease:'power2.out'},t0+.3)
+         .fromTo(rimg[k],{scale:1.22,xPercent:k%2?5:-5},{scale:1.04,xPercent:0,duration:.65,ease:'power2.out'},t0+.3)
          .set(rms[k-1],{opacity:0},t0+.86)
          .addLabel('r'+k,9+k);
       }
-      T.eventCallback('onUpdate',()=>{if(T.time()<2.15&&intro.progress()>.99)gsap.set(gridLines,{opacity:1})});window.__T=T;
-      var starts=[0.05,1.05,2.05,4.05,5.05,6.05,7.05,8.05,9.05,10.05,11.05,12.05,13.05];
+      T.eventCallback('onUpdate',()=>{if(T.time()<2.15&&intro.progress()>.99)gsap.set(gridLines,{opacity:1});setStage(stageAtTime(T.time()));});window.__T=T;
       ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:1,anticipatePin:1,animation:T,
-        snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.35,max:.9},delay:.12,ease:'power2.inOut',inertia:false},
-        onUpdate:function(s){var t=T.duration()*s.progress,k=0;for(var i=0;i<starts.length;i++){if(t>=starts[i])k=i+1}setStage(k)}});
+        snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.25,max:.6},delay:.35,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
       listen(window,'resize',function(){fit();applyMorph()});
       const stageLabels=['p0','p1','p2','p3','p4','p5','p6','p7','r0'];
-      listen(section,'click',event=>{const button=event.target.closest('.b-list button');if(!button)return;const st=ScrollTrigger.getById('interior-build');const time=T.labels[stageLabels[Number(button.dataset.stage)]];const target=st.start+(time/T.duration())*(st.end-st.start)+2;if(lenis){navigating=true;lenis.scrollTo(target,{duration:.9,onComplete:()=>{navigating=false}});}else window.scrollTo({top:target,behavior:'smooth'});});
+      listen(section,'click',event=>{const button=event.target.closest('.b-list button,[data-room-step]');if(!button)return;const st=ScrollTrigger.getById('interior-build');st.getTween(true)?.kill?.();const label=button.hasAttribute('data-room-step')?'r'+Math.max(0,Math.min(5,cur-8+Number(button.dataset.roomStep))):stageLabels[Number(button.dataset.stage)];const time=T.labels[label];const target=st.start+(time/T.duration())*(st.end-st.start)+.1;if(lenis){lenis.start();navigating=true;lenis.scrollTo(target,{duration:.9,onComplete:()=>{navigating=false}});}else window.scrollTo({top:target,behavior:'smooth'});});
     
   },section);
   const refresh=()=>ScrollTrigger.refresh();document.fonts?.ready.then(refresh);listen(window,'load',refresh);
   const resize=new ResizeObserver(()=>ScrollTrigger.refresh());document.querySelectorAll('details').forEach(el=>resize.observe(el));
-  return()=>{context.revert();resize.disconnect();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
+  return()=>{gsap.killTweensOf($$('#bStage .st'));context.revert();lenis?.start();resize.disconnect();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
  });
  return()=>media.revert();
 }
