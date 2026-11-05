@@ -54,6 +54,7 @@ var cvs=$('#canvas'),cv=$('#cv');
       }
 
       /* intro on load: grid + title */
+      setStage(0);
       var bs=hasSplit?SplitText.create('#buildTitle',{type:'words',mask:'words'}):null;
       var intro=gsap.timeline({defaults:{ease:'expo.out'},scrollTrigger:{trigger:section,start:'top 80%',once:true}});
       intro.from(bs?bs.words:'#buildTitle',{yPercent:110,duration:1.3,stagger:.06},.1)
@@ -126,22 +127,27 @@ var cvs=$('#canvas'),cv=$('#cv');
          .set(rms[k-1],{opacity:0},t0+.86)
          .addLabel('r'+k,9+k);
       }
+      // Hold the fully revealed hallway before releasing the pin.
+      T.to({},{duration:.6},'r5');
       T.eventCallback('onUpdate',()=>{if(T.time()<2.15&&intro.progress()>.99)gsap.set(gridLines,{opacity:1});setStage(stageAtTime(T.time()));});window.__T=T;
       // ScrollTrigger can render the scrub tween with suppressed callbacks at snap stops.
       // Read the committed timeline time on the next GSAP tick as well.
       const syncCaption=()=>setStage(stageAtTime(T.time()));gsap.ticker.add(syncCaption);removers.push(()=>gsap.ticker.remove(syncCaption));
       ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:match.conditions.mobile?.3:.5,anticipatePin:1,animation:T,
-        snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.2,max:.45},delay:.05,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
+        snap:match.conditions.mobile&&(match.conditions.touch||navigator.maxTouchPoints>0)?false:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.2,max:.45},delay:.05,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
       listen(window,'resize',function(){fit();applyMorph()});
       const stageLabels=['p0','p1','p2','p3','p4','p5','p6','p7','r0'];
       listen(section,'click',event=>{const button=event.target.closest('.b-list button,[data-room-step]');if(!button)return;const st=ScrollTrigger.getById('interior-build');st.getTween(true)?.kill?.();const label=button.hasAttribute('data-room-step')?'r'+Math.max(0,Math.min(5,cur-8+Number(button.dataset.roomStep))):stageLabels[Number(button.dataset.stage)];const time=T.labels[label];const target=st.start+(time/T.duration())*(st.end-st.start)+.1;if(lenis){lenis.start();navigating=true;lenis.scrollTo(target,{duration:.9,onComplete:()=>{navigating=false}});}else window.scrollTo({top:target,behavior:'smooth'});});
     
   },section);
-  const refresh=()=>ScrollTrigger.refresh();document.fonts?.ready.then(refresh);listen(window,'load',refresh);
+  let active=true;const refresh=()=>{if(active)ScrollTrigger.refresh()};
+  const imagesReady=Promise.all($$('img').map(img=>new Promise(resolve=>{if(img.complete){resolve();return;}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true})}).then(()=>img.decode?.().catch(()=>{}))));
+  Promise.all([document.fonts?.ready,imagesReady]).then(refresh);listen(window,'load',refresh);
   const resize=new ResizeObserver(()=>ScrollTrigger.refresh());document.querySelectorAll('details').forEach(el=>resize.observe(el));
-  return()=>{gsap.killTweensOf($$('#bStage .st'));context.revert();lenis?.start();resize.disconnect();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
+  return()=>{active=false;gsap.killTweensOf($$('#bStage .st'));context.revert();lenis?.start();resize.disconnect();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
  });
  return()=>media.revert();
 }
+
 
 

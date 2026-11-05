@@ -61,3 +61,6 @@ build-stages.js: подписи следуют времени scrub-анимац
 
 ## Отзывчивость build
 На touch Lenis отключён (any-pointer:coarse/maxTouchPoints), desktop duration .9; scrub mobile .3 / desktop .5; snap delay .05, duration .2–.45. Мобильные 1100px WebP подключены picture/source srcset, исходные JPG сохранены; preload первых двух кадров с media. build-кадры не делать lazy/async. Проверки qa/responsive-build-2026-11-05/.
+
+## Уточнение мобильной сцены (последнее)
+Мобильные WebP1100 отменены: активны исходные JPG на всех устройствах. Копии находятся в archive/mobile-build-1100-2026-11-05/. На touch <=900 snap=false, desktop snap сохранён. После r5 удержание .6 (timeline14.6). history.scrollRestoration manual в head; refresh после шрифтов и load/decode всех изображений. Начальный stage0 задаётся явно. Последняя проверка qa/native-build-2026-11-05/README.md.

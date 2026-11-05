@@ -12,3 +12,5 @@ Backup: tag backup-before-polish-2026-11-03; archive/site-before-polish-2026-11-
 5 ноября: подготовлено к GitHub Pages, см. PUBLISH.md и qa/pages-2026-11-05/README.md. Git по просьбе пользователя не трогали; изменения локальные. Архивы старого QA перенесены в archive/pages-preparation-2026-11-05/old-qa/.
 
 5 ноября: ускорена build-сцена, мобильные WebP и native touch scrolling. Git не трогали. Детали qa/responsive-build-2026-11-05/README.md.
+
+Последняя правка build: исходные JPG на всех экранах; touch<=900 без snap; hallway hold .6; initial Пустой лист. 16 touch-свайпов прошли все 6комнат. Git не трогали. qa/native-build-2026-11-05/.
