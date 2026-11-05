@@ -6,3 +6,5 @@
 Backup: tag backup-before-polish-2026-11-03; archive/site-before-polish-2026-11-03.zip (локально, исключён из Git), проверен CRC/SHA256. Подробнее archive/backup-before-polish-2026-11-03.md.
 Проверки: qa/polish-2026-11-03/README.md. Сборка и 5 тестов прошли. Публикация и push не выполнялись.
 Исходники source/src; корневой index.html генерируется scripts/build.mjs. Читать AGENTS.md перед изменениями. Старые audit-папки не удалять.
+
+5 ноября: исправлены цвета trial-lesson и footer, muted-текст. Проверки qa/color-2026-11-05/. Backup tag backup-before-color-fix-2026-11-05.
