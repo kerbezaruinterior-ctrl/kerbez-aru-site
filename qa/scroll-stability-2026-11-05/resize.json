@@ -1,0 +1,9 @@
+{
+  "mobile": {
+    "y": 3500,
+    "refreshes": 0
+  },
+  "desktop": {
+    "lenisResizeCalls": 1
+  }
+}

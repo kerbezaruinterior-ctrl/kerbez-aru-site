@@ -1,0 +1,38 @@
+{
+  "y": 3464,
+  "refreshes": 359,
+  "traces": [
+    {
+      "y": 0,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 0,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 26,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 50,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 70,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 95,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 112,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    },
+    {
+      "y": 138,
+      "stack": "Error\n    at ScrollTrigger.refresh (eval at evaluate (:311:30), <anonymous>:1:126)\n    at http://127.0.0.1:4174/assets/index-DbsI3mwo.js:49:51287"
+    }
+  ]
+}

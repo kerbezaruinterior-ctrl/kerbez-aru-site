@@ -64,3 +64,6 @@ build-stages.js: подписи следуют времени scrub-анимац
 
 ## Уточнение мобильной сцены (последнее)
 Мобильные WebP1100 отменены: активны исходные JPG на всех устройствах. Копии находятся в archive/mobile-build-1100-2026-11-05/. На touch <=900 snap=false, desktop snap сохранён. После r5 удержание .6 (timeline14.6). history.scrollRestoration manual в head; refresh после шрифтов и load/decode всех изображений. Начальный stage0 задаётся явно. Последняя проверка qa/native-build-2026-11-05/README.md.
+
+## Стабильность прокрутки — последнее правило
+Не вызывать ScrollTrigger.refresh из MutationObserver или ResizeObserver страницы/details: refresh меняет DOM pin и создаёт рекурсивный цикл. site-motion наблюдает DOM только ради prepare/reveal. Startup refresh только из Promise.all(fonts.ready + load/decode img/build и img/rooms) и window load, при прокрутке откладывается до scrollEnd. ScrollTrigger.config ignoreMobileResize:true, autoRefreshEvents:'resize'. После refresh синхронизировать lenis.resize, удалять обработчики в cleanup. Проверки qa/scroll-stability-2026-11-05/README.md.

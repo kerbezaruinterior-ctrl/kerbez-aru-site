@@ -3,7 +3,7 @@ export function initBuild(){
  const section=document.getElementById('build');if(!section)return;
  const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger,SplitText=window.SplitText;
  if(!gsap||!ScrollTrigger)return;
- gsap.registerPlugin(ScrollTrigger);const hasSplit=!!SplitText;if(hasSplit)gsap.registerPlugin(SplitText);
+ gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true,autoRefreshEvents:'resize'});const hasSplit=!!SplitText;if(hasSplit)gsap.registerPlugin(SplitText);
  const $=s=>section.querySelector(s),$$=s=>Array.from(section.querySelectorAll(s));
  const removers=[];const listen=(target,type,fn)=>{target.addEventListener(type,fn);removers.push(()=>target.removeEventListener(type,fn))};
  const media=gsap.matchMedia();
@@ -140,11 +140,19 @@ var cvs=$('#canvas'),cv=$('#cv');
       listen(section,'click',event=>{const button=event.target.closest('.b-list button,[data-room-step]');if(!button)return;const st=ScrollTrigger.getById('interior-build');st.getTween(true)?.kill?.();const label=button.hasAttribute('data-room-step')?'r'+Math.max(0,Math.min(5,cur-8+Number(button.dataset.roomStep))):stageLabels[Number(button.dataset.stage)];const time=T.labels[label];const target=st.start+(time/T.duration())*(st.end-st.start)+.1;if(lenis){lenis.start();navigating=true;lenis.scrollTo(target,{duration:.9,onComplete:()=>{navigating=false}});}else window.scrollTo({top:target,behavior:'smooth'});});
     
   },section);
-  let active=true;const refresh=()=>{if(active)ScrollTrigger.refresh()};
-  const imagesReady=Promise.all($$('img').map(img=>new Promise(resolve=>{if(img.complete){resolve();return;}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true})}).then(()=>img.decode?.().catch(()=>{}))));
-  Promise.all([document.fonts?.ready,imagesReady]).then(refresh);listen(window,'load',refresh);
-  const resize=new ResizeObserver(()=>ScrollTrigger.refresh());document.querySelectorAll('details').forEach(el=>resize.observe(el));
-  return()=>{active=false;gsap.killTweensOf($$('#bStage .st'));context.revert();lenis?.start();resize.disconnect();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
+  let active=true,pendingRefresh=false;
+  // Only asset readiness and the single window load can request a startup refresh.
+  // Defer either request if the visitor has already begun scrolling.
+  const refresh=()=>{if(!active)return;if(ScrollTrigger.isScrolling()){pendingRefresh=true;return;}pendingRefresh=false;ScrollTrigger.refresh()};
+  const onScrollEnd=()=>{if(pendingRefresh)refresh()};
+  const resizeLenis=()=>{if(active)lenis?.resize()};
+  ScrollTrigger.addEventListener('scrollEnd',onScrollEnd);ScrollTrigger.addEventListener('refresh',resizeLenis);
+  removers.push(()=>{ScrollTrigger.removeEventListener('scrollEnd',onScrollEnd);ScrollTrigger.removeEventListener('refresh',resizeLenis)});
+  const sceneImages=$$('img').filter(img=>/\/img\/(build|rooms)\//.test(img.getAttribute('src')||''));
+  const imagesReady=Promise.all(sceneImages.map(img=>new Promise(resolve=>{if(img.complete){resolve();return;}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true})}).then(()=>img.decode?.().catch(()=>{}))));
+  Promise.all([document.fonts?.ready,imagesReady]).then(refresh);
+  if(document.readyState==='complete')refresh();else listen(window,'load',refresh);
+  return()=>{active=false;gsap.killTweensOf($$('#bStage .st'));context.revert();lenis?.start();removers.splice(0).forEach(fn=>fn());if(raf)gsap.ticker.remove(raf);lenis?.destroy();section.classList.remove('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=true);section.querySelectorAll('.st').forEach(el=>el.removeAttribute('aria-hidden'));delete section.dataset.stage;delete window.__T;delete window.__lenis;};
  });
  return()=>media.revert();
 }

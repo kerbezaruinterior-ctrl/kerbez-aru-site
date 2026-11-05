@@ -56,14 +56,12 @@ export function initSiteMotion(){
    });
   }
   prepare();
-  const refresh=()=>{if(refreshFrame)return;refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;prepare();ScrollTrigger.refresh();requestNav()})};
+  // DOM discovery must not refresh ScrollTrigger: pin refresh itself mutates the DOM.
+  const refresh=()=>{if(refreshFrame)return;refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;prepare();requestNav()})};
   const mutations=new MutationObserver(refresh);mutations.observe(main,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','open']});
   const focus=e=>{const target=e.target.closest('[data-motion-state="pending"]');if(target){observer.unobserve(target);gsap.killTweensOf(target);gsap.set(target,{clearProps:'opacity,transform,clipPath'});target.dataset.motionState='visible'}};
   main.addEventListener('focusin',focus);
-  // Hidden panels and carousel content can change the page length without a resize.
-  let oldHeight=main.getBoundingClientRect().height;
-  const resize=new ResizeObserver(()=>{const height=main.getBoundingClientRect().height;if(Math.abs(height-oldHeight)>2){oldHeight=height;refresh()}});resize.observe(main);
-  return()=>{observer.disconnect();mutations.disconnect();resize.disconnect();main.removeEventListener('focusin',focus);cancelAnimationFrame(refreshFrame);context.revert();tweens.forEach(t=>t.kill());targets.forEach(el=>{gsap.killTweensOf(el);gsap.set(el,{clearProps:'opacity,transform,clipPath,--rule-progress'});el.classList.remove('motion-rule');delete el.dataset.motionState;delete el.dataset.motionDelay;});};
+  return()=>{observer.disconnect();mutations.disconnect();main.removeEventListener('focusin',focus);cancelAnimationFrame(refreshFrame);context.revert();tweens.forEach(t=>t.kill());targets.forEach(el=>{gsap.killTweensOf(el);gsap.set(el,{clearProps:'opacity,transform,clipPath,--rule-progress'});el.classList.remove('motion-rule');delete el.dataset.motionState;delete el.dataset.motionDelay;});};
  });
  return()=>{media.revert();listeners.forEach(fn=>fn());cancelAnimationFrame(navFrame);document.querySelectorAll('[data-current]').forEach(a=>{a.removeAttribute('data-current');a.removeAttribute('aria-current')})};
 }
