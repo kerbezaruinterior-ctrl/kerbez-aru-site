@@ -1,0 +1,497 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "config": {
+        "lenis": true,
+        "duration": 0.9,
+        "scrub": 0.5,
+        "delay": 0.05,
+        "snapDuration": {
+          "min": 0.2,
+          "max": 0.45
+        }
+      },
+      "selected": [
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/3-walls.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/4-finish.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/5-furniture.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/6-decor.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/7-light.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/1-living.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/2-dining.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/3-bedroom.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/4-study.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/5-bath.jpg",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/6-hall.jpg"
+      ],
+      "stages": [
+        {
+          "label": "p0",
+          "time": 0,
+          "stage": 0,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p1",
+          "time": 1,
+          "stage": 1,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p2",
+          "time": 2,
+          "stage": 2,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p3a",
+          "time": 3,
+          "stage": 3,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p3",
+          "time": 4,
+          "stage": 3,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p4",
+          "time": 5,
+          "stage": 4,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p5",
+          "time": 6,
+          "stage": 5,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p6",
+          "time": 7,
+          "stage": 6,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p7",
+          "time": 8,
+          "stage": 7,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r0",
+          "time": 9,
+          "stage": 8,
+          "rooms": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r1",
+          "time": 10,
+          "stage": 9,
+          "rooms": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r2",
+          "time": 11,
+          "stage": 10,
+          "rooms": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r3",
+          "time": 12,
+          "stage": 11,
+          "rooms": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r4",
+          "time": 13,
+          "stage": 12,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r5",
+          "time": 14,
+          "stage": 13,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "overflow": false
+        }
+      ],
+      "links": [
+        "https://wa.me/77054659807",
+        "https://wa.me/77055585807",
+        "https://wa.me/77019657691",
+        "tel:+77054659807"
+      ],
+      "errors": [],
+      "missing": []
+    },
+    {
+      "width": 390,
+      "config": {
+        "lenis": false,
+        "scrub": 0.3,
+        "delay": 0.05,
+        "snapDuration": {
+          "min": 0.2,
+          "max": 0.45
+        }
+      },
+      "selected": [
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/3-walls-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/4-finish-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/5-furniture-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/6-decor-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/build/7-light-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/1-living-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/2-dining-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/3-bedroom-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/4-study-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/5-bath-mobile.webp",
+        "http://127.0.0.1:4175/kerbez-aru-site/img/rooms/6-hall-mobile.webp"
+      ],
+      "stages": [
+        {
+          "label": "p0",
+          "time": 0,
+          "stage": 0,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p1",
+          "time": 0.9992947,
+          "stage": 1,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p2",
+          "time": 2.0005643,
+          "stage": 2,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p3a",
+          "time": 2.9998589,
+          "stage": 3,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p3",
+          "time": 4.0011285,
+          "stage": 3,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p4",
+          "time": 5.0004232,
+          "stage": 4,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p5",
+          "time": 5.9997179,
+          "stage": 5,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p6",
+          "time": 7.0009874,
+          "stage": 6,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "p7",
+          "time": 8.0002821,
+          "stage": 7,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r0",
+          "time": 8.9995768,
+          "stage": 8,
+          "rooms": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r1",
+          "time": 10.0008464,
+          "stage": 9,
+          "rooms": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r2",
+          "time": 11.0001411,
+          "stage": 10,
+          "rooms": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r3",
+          "time": 11.9994357,
+          "stage": 11,
+          "rooms": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r4",
+          "time": 13.0007053,
+          "stage": 12,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "overflow": false
+        },
+        {
+          "label": "r5",
+          "time": 14,
+          "stage": 13,
+          "rooms": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "overflow": false
+        }
+      ],
+      "links": [
+        "https://wa.me/77054659807",
+        "https://wa.me/77055585807",
+        "https://wa.me/77019657691",
+        "tel:+77054659807"
+      ],
+      "errors": [],
+      "missing": []
+    }
+  ],
+  "imageCount": 446,
+  "violations": []
+}

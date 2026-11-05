@@ -58,3 +58,6 @@ build-stages.js: подписи следуют времени scrub-анимац
 Корень готов к https://kerbezaruinterior-ctrl.github.io/kerbez-aru-site/. .nojekyll пустой. Метаданные редактировать в source/index.html; img/og-kerbez-aru.jpg 1200×630. Только относительные локальные URL; OG использует полный публичный URL.
 Активные изображения assets/ и img/: JPG/WebP, до 400 000 байт, ширина до 1920 px. Оригиналы и неиспользуемые файлы находятся в archive/pages-preparation-2026-11-05/. Архивы не оптимизировать повторно: variant-2 остаётся побайтно сохранённым. Старые QA-материалы перенесены туда в old-qa/.
 Подписи сцены дополнительно синхронизируются на GSAP ticker: ScrollTrigger snap может завершить scrub с suppressEvents. Сохранять удаление ticker при cleanup.
+
+## Отзывчивость build
+На touch Lenis отключён (any-pointer:coarse/maxTouchPoints), desktop duration .9; scrub mobile .3 / desktop .5; snap delay .05, duration .2–.45. Мобильные 1100px WebP подключены picture/source srcset, исходные JPG сохранены; preload первых двух кадров с media. build-кадры не делать lazy/async. Проверки qa/responsive-build-2026-11-05/.

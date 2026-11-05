@@ -7,11 +7,11 @@ export function initBuild(){
  const $=s=>section.querySelector(s),$$=s=>Array.from(section.querySelectorAll(s));
  const removers=[];const listen=(target,type,fn)=>{target.addEventListener(type,fn);removers.push(()=>target.removeEventListener(type,fn))};
  const media=gsap.matchMedia();
- media.add({motion:'(prefers-reduced-motion: no-preference)',mobile:'(max-width:900px)',desktop:'(min-width:901px)'},match=>{
+ media.add({motion:'(prefers-reduced-motion: no-preference)',mobile:'(max-width:900px)',desktop:'(min-width:901px)',touch:'(any-pointer:coarse)'},match=>{
   if(!match.conditions.motion)return;
   section.classList.add('build-motion');section.querySelectorAll('.b-list button').forEach(b=>b.disabled=false);
   let lenis=null,raf=null,navigating=false;
-  if(window.Lenis){lenis=new window.Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);raf=t=>lenis.raf(t*1000);gsap.ticker.add(raf);gsap.ticker.lagSmoothing(0);window.__lenis=lenis;}
+  if(window.Lenis&&!match.conditions.touch&&navigator.maxTouchPoints===0){lenis=new window.Lenis({duration:.9,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);raf=t=>lenis.raf(t*1000);gsap.ticker.add(raf);gsap.ticker.lagSmoothing(0);window.__lenis=lenis;}
   const anchor=e=>{const a=e.target.closest('a[href^="#"]');if(!a||!lenis)return;const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();ScrollTrigger.getById('interior-build')?.getTween(true)?.kill?.();lenis.start();navigating=true;lenis.scrollTo(target,{duration:1.6,offset:-72,onComplete:()=>{navigating=false}})}};
   listen(document,'click',anchor);
   // Input can interrupt a Lenis anchor before onComplete fires. Never leave snap disabled.
@@ -130,8 +130,8 @@ var cvs=$('#canvas'),cv=$('#cv');
       // ScrollTrigger can render the scrub tween with suppressed callbacks at snap stops.
       // Read the committed timeline time on the next GSAP tick as well.
       const syncCaption=()=>setStage(stageAtTime(T.time()));gsap.ticker.add(syncCaption);removers.push(()=>gsap.ticker.remove(syncCaption));
-      ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:1,anticipatePin:1,animation:T,
-        snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.25,max:.6},delay:.35,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
+      ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:match.conditions.mobile?.3:.5,anticipatePin:1,animation:T,
+        snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.2,max:.45},delay:.05,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
       listen(window,'resize',function(){fit();applyMorph()});
       const stageLabels=['p0','p1','p2','p3','p4','p5','p6','p7','r0'];
       listen(section,'click',event=>{const button=event.target.closest('.b-list button,[data-room-step]');if(!button)return;const st=ScrollTrigger.getById('interior-build');st.getTween(true)?.kill?.();const label=button.hasAttribute('data-room-step')?'r'+Math.max(0,Math.min(5,cur-8+Number(button.dataset.roomStep))):stageLabels[Number(button.dataset.stage)];const time=T.labels[label];const target=st.start+(time/T.duration())*(st.end-st.start)+.1;if(lenis){lenis.start();navigating=true;lenis.scrollTo(target,{duration:.9,onComplete:()=>{navigating=false}});}else window.scrollTo({top:target,behavior:'smooth'});});
@@ -143,4 +143,5 @@ var cvs=$('#canvas'),cv=$('#cv');
  });
  return()=>media.revert();
 }
+
 

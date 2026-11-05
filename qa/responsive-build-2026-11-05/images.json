@@ -1,0 +1,57 @@
+[
+  {
+    "file": "img/build/3-walls-mobile.webp",
+    "bytes": 27346,
+    "width": 1100
+  },
+  {
+    "file": "img/build/4-finish-mobile.webp",
+    "bytes": 26960,
+    "width": 1100
+  },
+  {
+    "file": "img/build/5-furniture-mobile.webp",
+    "bytes": 30402,
+    "width": 1100
+  },
+  {
+    "file": "img/build/6-decor-mobile.webp",
+    "bytes": 36602,
+    "width": 1100
+  },
+  {
+    "file": "img/build/7-light-mobile.webp",
+    "bytes": 34192,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/1-living-mobile.webp",
+    "bytes": 117704,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/2-dining-mobile.webp",
+    "bytes": 68522,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/3-bedroom-mobile.webp",
+    "bytes": 86854,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/4-study-mobile.webp",
+    "bytes": 108000,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/5-bath-mobile.webp",
+    "bytes": 81448,
+    "width": 1100
+  },
+  {
+    "file": "img/rooms/6-hall-mobile.webp",
+    "bytes": 49638,
+    "width": 1100
+  }
+]
