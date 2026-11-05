@@ -53,3 +53,8 @@ SchoolHelp.jsx: FAQ только из подтверждённых услови�
 StudentProjects.jsx: разбор реального листа Улпан без вымышленных отзывов преподавателя. AlbumViewer поддерживает initialPage; проектные превью открывают содержательный лист.
 build-stages.js: подписи следуют времени scrub-анимации. Комнатные кнопки используют r0…r5; прежние pin, homography и camera сохранены. Snap останавливает Lenis только при ручной прокрутке; при программном переходе не вызывать start/stop, иначе сбрасывается его целевая позиция. getTween(true) может вернуть false — проверять наличие kill.
 Резервная копия: archive/backup-before-polish-2026-11-03.md и Git tag backup-before-polish-2026-11-03. ZIP не удалять.
+
+## GitHub Pages — 5 ноября 2026
+Корень готов к https://kerbezaruinterior-ctrl.github.io/kerbez-aru-site/. .nojekyll пустой. Метаданные редактировать в source/index.html; img/og-kerbez-aru.jpg 1200×630. Только относительные локальные URL; OG использует полный публичный URL.
+Активные изображения assets/ и img/: JPG/WebP, до 400 000 байт, ширина до 1920 px. Оригиналы и неиспользуемые файлы находятся в archive/pages-preparation-2026-11-05/. Архивы не оптимизировать повторно: variant-2 остаётся побайтно сохранённым. Старые QA-материалы перенесены туда в old-qa/.
+Подписи сцены дополнительно синхронизируются на GSAP ticker: ScrollTrigger snap может завершить scrub с suppressEvents. Сохранять удаление ticker при cleanup.

@@ -127,6 +127,9 @@ var cvs=$('#canvas'),cv=$('#cv');
          .addLabel('r'+k,9+k);
       }
       T.eventCallback('onUpdate',()=>{if(T.time()<2.15&&intro.progress()>.99)gsap.set(gridLines,{opacity:1});setStage(stageAtTime(T.time()));});window.__T=T;
+      // ScrollTrigger can render the scrub tween with suppressed callbacks at snap stops.
+      // Read the committed timeline time on the next GSAP tick as well.
+      const syncCaption=()=>setStage(stageAtTime(T.time()));gsap.ticker.add(syncCaption);removers.push(()=>gsap.ticker.remove(syncCaption));
       ScrollTrigger.create({id:'interior-build',trigger:'#buildPin',start:'top top',end:'+='+Math.round(T.duration()*60)+'%',pin:true,scrub:1,anticipatePin:1,animation:T,
         snap:{snapTo:value=>navigating?value:gsap.utils.snap(Object.values(T.labels).map(time=>time/T.duration()),value),duration:{min:.25,max:.6},delay:.35,ease:'power2.inOut',inertia:false,onStart:self=>{if(navigating){self.getTween(true)?.kill?.();return;}lenis?.stop()},onInterrupt:()=>{if(!navigating)lenis?.start()},onComplete:()=>{if(!navigating)lenis?.start()}}});
       listen(window,'resize',function(){fit();applyMorph()});
@@ -140,3 +143,4 @@ var cvs=$('#canvas'),cv=$('#cv');
  });
  return()=>media.revert();
 }
+

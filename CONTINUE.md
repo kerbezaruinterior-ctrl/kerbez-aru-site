@@ -8,3 +8,5 @@ Backup: tag backup-before-polish-2026-11-03; archive/site-before-polish-2026-11-
 Исходники source/src; корневой index.html генерируется scripts/build.mjs. Читать AGENTS.md перед изменениями. Старые audit-папки не удалять.
 
 5 ноября: исправлены цвета trial-lesson и footer, muted-текст. Проверки qa/color-2026-11-05/. Backup tag backup-before-color-fix-2026-11-05.
+
+5 ноября: подготовлено к GitHub Pages, см. PUBLISH.md и qa/pages-2026-11-05/README.md. Git по просьбе пользователя не трогали; изменения локальные. Архивы старого QA перенесены в archive/pages-preparation-2026-11-05/old-qa/.
