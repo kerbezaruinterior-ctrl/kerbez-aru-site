@@ -67,3 +67,11 @@ build-stages.js: подписи следуют времени scrub-анимац
 
 ## Стабильность прокрутки — последнее правило
 Не вызывать ScrollTrigger.refresh из MutationObserver или ResizeObserver страницы/details: refresh меняет DOM pin и создаёт рекурсивный цикл. site-motion наблюдает DOM только ради prepare/reveal. Startup refresh только из Promise.all(fonts.ready + load/decode img/build и img/rooms) и window load, при прокрутке откладывается до scrollEnd. ScrollTrigger.config ignoreMobileResize:true, autoRefreshEvents:'resize'. После refresh синхронизировать lenis.resize, удалять обработчики в cleanup. Проверки qa/scroll-stability-2026-11-05/README.md.
+## Правила, чтобы не сломать сайт
+
+1. Сайт публикуется через GitHub Pages: https://kerbezaruinterior-ctrl.github.io/kerbez-aru-site/ — все пути к локальным ресурсам только относительные, без ведущего «/». Файл `.nojekyll` не удалять. Папка `archive/` указана в `.gitignore` и на сайт не попадает.
+2. Секция `#build`: никогда не вызывать `ScrollTrigger.refresh()` из `MutationObserver`, на загрузку отдельных картинок или во время прокрутки — это уже вызывало цикл пересчётов и прыжок страницы наверх. Допустимы только стартовые refresh.
+3. На тач-экранах (≤900 px) у `#build` нет snap и нет Lenis — не включать обратно.
+4. Картинки `img/build/*` и `img/rooms/*` — только исходного размера. Не заменять уменьшенными копиями: это уже приводило к размытому изображению на телефонах.
+5. После любой правки проверять на 1440 px и 390 px (touch): нет прыжков наверх, все этапы и 6 комнат проходятся, в консоли нет ошибок.
+6. Git не трогать — коммиты и Push делает человек в GitHub Desktop.
